@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block resolver_result %}
+
+{{ val2 }} records of
+<div>
+
+{% for domain, records in output.items  %}
+  <li> {{ domain }}<br><br>
+          <ul>
+        	{% for record in records %}
+        	<ul>
+        	{{ record }}
+            </ul>
+        	{% endfor %} 
+        </ul>	
+    </li>
+    <br>	
+    
+{% endfor %}
+</div>	
+{% endblock %}

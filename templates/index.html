@@ -1,0 +1,49 @@
+  {% extends "base.html" %}
+
+{% block title %}My amazing blog{% endblock %}
+{% block content %}
+<p>{% if user.is_authenticated %}
+  Hi {{ user.username }}!</p>
+
+<section>
+  
+    
+    <div>
+    	<form method="post" action="compute">{% csrf_token %}
+  
+ 	<label for="domains">Enter domain or list of domains:</label><br>
+ 	<input type="text" id="domains" name="domains" style='size:250; width:auto'><br>
+
+    <label for="records">Choose record </label>
+ 	<select id="records" name="records">
+  		<option value="MX">MX</option>
+  		<option value="NS">NS</option>
+  		<option value="TXT">TXT</option>
+ 		<option value="CNAME">CNAME</option>
+	</select> 
+
+	<input type="submit" value="Submit">
+	<p>{% block resolver_result %}{% endblock %}</p>
+
+</form> 
+</div>
+  </article>
+</section>
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+  <p>Please Log In</p>
+  <p>
+  	
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+
+<input type="submit" value="login">
+<input type="hidden" name="next" value="{{ next }}">
+</form>
+  </p>
+{% endif %}
+{% endblock %}
+
+
+
